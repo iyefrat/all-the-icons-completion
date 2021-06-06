@@ -1,0 +1,29 @@
+#+TITLE: all-the-icons-completion
+
+Add icons to completion candidates using the built in completion metadata functions.
+
+* Requirements
+This package only supports Emacs version 26.1 and above.
+
+It requires [[https://github.com/domtronn/all-the-icons.el][all-the-icons]].
+* Installation
+This package is not yet available on MELPA, so you need to clone it yourself put the file in your load-path.
+
+* Usage
+Add the following to your init-file:
+
+#+begin_src emacs-lisp
+(all-the-icons-completion-mode)
+#+end_src
+
+If you want to use it as an addon to ~marginalia-mode~, add the following to your init-file:
+
+#+begin_src emacs-lisp
+(add-hook 'marginalia-mode-hook
+          (lambda () all-the-icons-completion-mode (if marginalia-mode 1 -1)))
+#+end_src
+
+This will ensure that it is on when ~marginalia-mode~ is on and is off when it's off.
+
+* Acknowledgements
+Thanks to [[https://github.com/minad][@minad]] and [[https://github.com/noctuid][@noctuid]] for getting the ball rolling on the functions used in this package.

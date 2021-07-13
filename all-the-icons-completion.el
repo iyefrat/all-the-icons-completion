@@ -61,7 +61,8 @@
                 (all-the-icons-faicon "sticky-note-o")
               parent-icon)
           icon)
-        " ")))))
+        " ")))
+    (t "")))
 
 ;;;###autoload
 (defun all-the-icons-completion-completion-metadata-get (orig metadata prop)

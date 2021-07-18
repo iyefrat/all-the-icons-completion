@@ -19,8 +19,7 @@ Add the following to your init-file:
 If you want to use it as an addon to ~marginalia-mode~, add the following to your init-file:
 
 #+begin_src emacs-lisp
-(add-hook 'marginalia-mode-hook
-          (lambda () all-the-icons-completion-mode (if marginalia-mode 1 -1)))
+(add-hook 'marginalia-mode-hook #'all-the-icons-completion-marginalia-setup)
 #+end_src
 
 This will ensure that it is on when ~marginalia-mode~ is on and is off when it's off.

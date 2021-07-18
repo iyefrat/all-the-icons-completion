@@ -103,6 +103,14 @@ PROP is the property which is looked up."
          (aff)))
     (funcall orig metadata prop)))
 
+;; For the byte compiler
+(defvar marginalia-mode)
+
+;;;###autoload
+(defun all-the-icons-completion-marginalia-setup ()
+  "Hook to `marginalia-mode-hook' to bind `all-the-icons-completion-mode' to it."
+(all-the-icons-completion-mode (if marginalia-mode 1 -1)))
+
 ;;;###autoload
 (define-minor-mode all-the-icons-completion-mode
   "Add icons to completion candidates."

@@ -50,6 +50,9 @@
     (file
      (cond ((string-match-p "\\/$" cand) (concat (all-the-icons-icon-for-dir cand) " "))
            (t (concat (all-the-icons-icon-for-file cand) " "))))
+    (project-file
+     (cond ((string-match-p "\\/$" cand) (concat (all-the-icons-icon-for-dir cand) " "))
+           (t (concat (all-the-icons-icon-for-file cand) " "))))
     (buffer
      (let* ((mode (buffer-local-value 'major-mode (get-buffer cand)))
             (icon (all-the-icons-icon-for-mode mode))

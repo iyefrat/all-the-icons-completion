@@ -43,7 +43,6 @@
   :group 'convenience
   :prefix "all-the-icons-completion")
 
-;;;###autoload
 (defun all-the-icons-completion-get-icon (cand cat)
   "Return the icon for the candidate CAND of completion category CAT."
   (cl-case cat
@@ -67,7 +66,6 @@
         " ")))
     (t "")))
 
-;;;###autoload
 (defun all-the-icons-completion-completion-metadata-get (orig metadata prop)
   "Meant as :around advice for `completion-metadata-get', Add icons as prefix.
 ORIG should be `completion-metadata-get'
@@ -108,7 +106,6 @@ PROP is the property which is looked up."
 
 ;; For the byte compiler
 (defvar marginalia-mode)
-
 ;;;###autoload
 (defun all-the-icons-completion-marginalia-setup ()
   "Hook to `marginalia-mode-hook' to bind `all-the-icons-completion-mode' to it."

@@ -3,9 +3,10 @@
 Add icons to completion candidates using the built in completion metadata functions.
 
 This package can be used with the default completions buffer:
-[[./default.png]]
+[[https://user-images.githubusercontent.com/19792685/127399489-91048936-95ee-4189-acc4-f88d7bd8b1a1.png]]
+
 Or with a completion framework such as [[https://github.com/minad/vertico][Vertico]]:
-[[./vertico.png]]
+[[https://user-images.githubusercontent.com/19792685/127399499-00101758-3dad-4983-abd1-0c3a58927f00.png]]
 
 * Requirements
 This package only supports Emacs version 26.1 and above.

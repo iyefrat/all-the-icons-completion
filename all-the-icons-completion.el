@@ -46,25 +46,29 @@
 (defun all-the-icons-completion-get-icon (cand cat)
   "Return the icon for the candidate CAND of completion category CAT."
   (cl-case cat
-    (file
-     (cond ((string-match-p "\\/$" cand) (concat (all-the-icons-icon-for-dir cand) " "))
-           (t (concat (all-the-icons-icon-for-file cand) " "))))
-    (project-file
-     (cond ((string-match-p "\\/$" cand) (concat (all-the-icons-icon-for-dir cand) " "))
-           (t (concat (all-the-icons-icon-for-file cand) " "))))
-    (buffer
-     (let* ((mode (buffer-local-value 'major-mode (get-buffer cand)))
-            (icon (all-the-icons-icon-for-mode mode))
-            (parent-icon (all-the-icons-icon-for-mode
-                          (get mode 'derived-mode-parent))))
-       (concat
-        (if (symbolp icon)
-            (if (symbolp parent-icon)
-                (all-the-icons-faicon "sticky-note-o")
-              parent-icon)
-          icon)
-        " ")))
+    (file (all-the-icons-completion-get-file-icon cand))
+    (project-file (all-the-icons-completion-get-file-icon cand))
+    (buffer (all-the-icons-completion-get-buffer-icon cand))
     (t "")))
+
+(defun all-the-icons-completion-get-file-icon (cand)
+  "Return the icon for the candidate CAND of completion category file."
+  (cond ((string-match-p "\\/$" cand) (concat (all-the-icons-icon-for-dir cand) " "))
+        (t (concat (all-the-icons-icon-for-file cand) " "))))
+
+(defun all-the-icons-completion-get-buffer-icon (cand)
+  "Return the icon for the candidate CAND of completion category buffer."
+  (let* ((mode (buffer-local-value 'major-mode (get-buffer cand)))
+         (icon (all-the-icons-icon-for-mode mode))
+         (parent-icon (all-the-icons-icon-for-mode
+                       (get mode 'derived-mode-parent))))
+    (concat
+     (if (symbolp icon)
+         (if (symbolp parent-icon)
+             (all-the-icons-faicon "sticky-note-o")
+           parent-icon)
+       icon)
+     " ")))
 
 (defun all-the-icons-completion-completion-metadata-get (orig metadata prop)
   "Meant as :around advice for `completion-metadata-get', Add icons as prefix.
@@ -109,7 +113,7 @@ PROP is the property which is looked up."
 ;;;###autoload
 (defun all-the-icons-completion-marginalia-setup ()
   "Hook to `marginalia-mode-hook' to bind `all-the-icons-completion-mode' to it."
-(all-the-icons-completion-mode (if marginalia-mode 1 -1)))
+  (all-the-icons-completion-mode (if marginalia-mode 1 -1)))
 
 ;;;###autoload
 (define-minor-mode all-the-icons-completion-mode

@@ -1,5 +1,7 @@
 #+TITLE: all-the-icons-completion
 
+[[https://melpa.org/#/all-the-icons-completion][file:https://melpa.org/packages/all-the-icons-completion-badge.svg]]
+
 Add icons to completion candidates using the built in completion metadata functions.
 
 This package can be used with the default completions buffer:
@@ -13,8 +15,7 @@ This package only supports Emacs version 26.1 and above.
 
 It requires [[https://github.com/domtronn/all-the-icons.el][all-the-icons]].
 * Installation
-This package is not yet available on MELPA, so you need to clone it yourself put the file in your load-path.
-
+This package can be installed from [[https://melpa.org/#/all-the-icons-completion][MELPA]], or by cloning it and putting it in the load path.
 * Usage
 Add the following to your init-file:
 

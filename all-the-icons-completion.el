@@ -83,16 +83,23 @@ PROP is the property which is looked up."
           (lambda (cands)
             (mapcar (lambda (x)
                       (pcase-exhaustive x
-                        (`(,cand ,_ ,suffix)
+                        (`(,cand ,prefix ,suffix)
                          (let ((orig (get-text-property 0 'consult-multi cand)))
-                           (list cand (all-the-icons-completion-get-icon (cdr orig) (car orig)) suffix)))))
+                           (list cand
+                                 (concat (all-the-icons-completion-get-icon (cdr orig) (car orig))
+                                         prefix)
+                                 suffix)))))
                     (funcall aff cands))))
          ((and cat aff)
           (lambda (cands)
             (mapcar (lambda (x)
                       (pcase-exhaustive x
-                        (`(,cand ,_ ,suffix)
-                         (list cand (all-the-icons-completion-get-icon cand cat) suffix))))
+                        (`(,cand ,prefix ,suffix)
+                         (let ((orig (get-text-property 0 'consult-multi cand)))
+                           (list cand
+                                 (concat (all-the-icons-completion-get-icon cand cat)
+                                         prefix)
+                                 suffix)))))
                     (funcall aff cands))))
          ((eq cat 'consult-multi)
           (lambda (cands)

@@ -79,12 +79,12 @@ PROP is the property which is looked up."
       (let ((cat (funcall orig metadata 'category))
             (aff (funcall orig metadata 'affixation-function)))
         (cond
-         ((and (eq cat 'consult-multi) aff)
+         ((and (eq cat 'multi-category) aff)
           (lambda (cands)
             (mapcar (lambda (x)
                       (pcase-exhaustive x
                         (`(,cand ,prefix ,suffix)
-                         (let ((orig (get-text-property 0 'consult-multi cand)))
+                         (let ((orig (get-text-property 0 'multi-category cand)))
                            (list cand
                                  (concat (all-the-icons-completion-get-icon (cdr orig) (car orig))
                                          prefix)
@@ -95,16 +95,16 @@ PROP is the property which is looked up."
             (mapcar (lambda (x)
                       (pcase-exhaustive x
                         (`(,cand ,prefix ,suffix)
-                         (let ((orig (get-text-property 0 'consult-multi cand)))
+                         (let ((orig (get-text-property 0 'multi-category cand)))
                            (list cand
                                  (concat (all-the-icons-completion-get-icon cand cat)
                                          prefix)
                                  suffix)))))
                     (funcall aff cands))))
-         ((eq cat 'consult-multi)
+         ((eq cat 'multi-category)
           (lambda (cands)
             (mapcar (lambda (x)
-                      (let ((orig (get-text-property 0 'consult-multi x)))
+                      (let ((orig (get-text-property 0 'multi-category x)))
                         (list x (all-the-icons-completion-get-icon (cdr orig) (car orig)) "")))
                     cands)))
          (cat

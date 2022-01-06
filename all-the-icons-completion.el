@@ -77,7 +77,10 @@ METADATA is the metadata.
 PROP is the property which is looked up."
   (if (eq prop 'affixation-function)
       (let ((cat (funcall orig metadata 'category))
-            (aff (funcall orig metadata 'affixation-function)))
+            (aff (or (funcall orig metadata 'affixation-function)
+                     (when-let ((ann (funcall orig metadata 'annotation-function)))
+                       (lambda (cands)
+                         (mapcar (lambda (x) (list x "" (funcall ann x))) cands))))))
         (cond
          ((and (eq cat 'consult-multi) aff)
           (lambda (cands)

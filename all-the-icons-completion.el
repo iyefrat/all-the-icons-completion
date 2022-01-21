@@ -43,6 +43,11 @@
   :group 'convenience
   :prefix "all-the-icons-completion")
 
+(defface all-the-icons-completion-dir-face
+  '((t nil))
+  "Face for the directory icon."
+  :group 'all-the-icons-faces)
+
 (defun all-the-icons-completion-get-icon (cand cat)
   "Return the icon for the candidate CAND of completion category CAT."
   (cl-case cat
@@ -53,7 +58,10 @@
 
 (defun all-the-icons-completion-get-file-icon (cand)
   "Return the icon for the candidate CAND of completion category file."
-  (cond ((string-match-p "\\/$" cand) (concat (all-the-icons-icon-for-dir cand) " "))
+  (cond ((string-match-p "\\/$" cand)
+         (concat
+          (all-the-icons-icon-for-dir cand :face 'all-the-icons-completion-dir-face)
+          " "))
         (t (concat (all-the-icons-icon-for-file cand) " "))))
 
 (defun all-the-icons-completion-get-buffer-icon (cand)

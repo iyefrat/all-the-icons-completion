@@ -106,11 +106,10 @@ PROP is the property which is looked up."
             (mapcar (lambda (x)
                       (pcase-exhaustive x
                         (`(,cand ,prefix ,suffix)
-                         (let ((orig (get-text-property 0 'multi-category cand)))
-                           (list cand
-                                 (concat (all-the-icons-completion-get-icon cand cat)
-                                         prefix)
-                                 suffix)))))
+                         (list cand
+                               (concat (all-the-icons-completion-get-icon cand cat)
+                                       prefix)
+                               suffix))))
                     (funcall aff cands))))
          ((eq cat 'multi-category)
           (lambda (cands)

@@ -54,7 +54,43 @@
     (file (all-the-icons-completion-get-file-icon cand))
     (project-file (all-the-icons-completion-get-file-icon cand))
     (buffer (all-the-icons-completion-get-buffer-icon cand))
+    (theme (all-the-icons-completion-get-theme-icon))
+    (imenu (all-the-icons-completion-get-imenu-icon cand))
     (t "")))
+
+(defun all-the-icons-completion-get-imenu-icon (cand)
+  "Return the icon for the candidate CAND of completion category imenu."
+  (concat
+   (let ((case-fold-search nil))
+     (cond
+      ((string-match-p "Type Parameters?[:)]" cand)
+       (all-the-icons-faicon "arrows" :height 0.85 :v-adjust -0.05))
+      ((string-match-p "\\(Variables?\\)\\|\\(Fields?\\)\\|\\(Parameters?\\)[:)]" cand)
+       (all-the-icons-octicon "tag" :height 0.95 :v-adjust 0 :face 'all-the-icons-lblue))
+      ((string-match-p "Constants?[:)]" cand)
+       (all-the-icons-faicon "square-o" :height 0.95 :v-adjust -0.15))
+      ((string-match-p "Enum\\(erations?\\)?[:)]" cand)
+       (all-the-icons-material "storage" :height 0.95 :v-adjust -0.2 :face 'all-the-icons-orange))
+      ((string-match-p "References?[:)]" cand)
+       (all-the-icons-material "collections_bookmark" :height 0.95 :v-adjust -0.2))
+      ((string-match-p "\\(Types?\\)\\|\\(Property\\)[:)]" cand)
+       (all-the-icons-faicon "wrench" :height 0.9 :v-adjust -0.05))
+      ((string-match-p "\\(Functions?\\)\\|\\(Methods?\\)\\|\\(Constructors?\\)[:)]" cand)
+       (all-the-icons-faicon "cube" :height 0.95 :v-adjust -0.05 :face 'all-the-icons-purple))
+      ((string-match-p "\\(Class\\)\\|\\(Structs?\\)[:)]" cand)
+       (all-the-icons-material "settings_input_component" :height 0.9 :v-adjust -0.15 :face 'all-the-icons-orange))
+      ((string-match-p "Interfaces?[:)]" cand)
+       (all-the-icons-material "share" :height 0.95 :v-adjust -0.2 :face 'all-the-icons-lblue))
+      ((string-match-p "Modules?[:)]" cand)
+       (all-the-icons-material "view_module" :height 0.95 :v-adjust -0.15 :face 'all-the-icons-lblue))
+      ((string-match-p "Packages?[:)]" cand)
+       (all-the-icons-faicon "archive" :height 0.9 :v-adjust -0.05 :face 'all-the-icons-silver))
+      (t (all-the-icons-octicon "tag" :height 0.95 :v-adjust 0 :face 'all-the-icons-blue))))
+   " "))
+
+(defun all-the-icons-completion-get-theme-icon ()
+  "Return the icon for completion category theme."
+  (concat (all-the-icons-material "palette" :height 1.0 :v-adjust -0.225 :face 'all-the-icons-lcyan) " "))
 
 (defun all-the-icons-completion-get-file-icon (cand)
   "Return the icon for the candidate CAND of completion category file."

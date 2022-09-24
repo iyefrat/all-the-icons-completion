@@ -54,6 +54,7 @@
     (file (all-the-icons-completion-get-file-icon cand))
     (project-file (all-the-icons-completion-get-file-icon cand))
     (buffer (all-the-icons-completion-get-buffer-icon cand))
+    (bookmark (all-the-icons-completion-get-bookmark-icon cand))
     (t "")))
 
 (defun all-the-icons-completion-get-file-icon (cand)
@@ -77,6 +78,10 @@
            parent-icon)
        icon)
      " ")))
+
+(defun all-the-icons-completion-get-bookmark-icon (cand)
+  "Return the icon for the candidate CAND of completion category bookmark."
+  (all-the-icons-completion-get-file-icon (bookmark-get-filename cand)))
 
 (defun all-the-icons-completion-completion-metadata-get (orig metadata prop)
   "Meant as :around advice for `completion-metadata-get', Add icons as prefix.

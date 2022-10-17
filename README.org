@@ -10,6 +10,8 @@ This package can be used with the default completions buffer:
 Or with a completion framework such as [[https://github.com/minad/vertico][Vertico]]:
 [[https://user-images.githubusercontent.com/19792685/127399499-00101758-3dad-4983-abd1-0c3a58927f00.png]]
 
+Supports many more icons than the [[https://github.com/iyefrat/all-the-icons-completion][original]] and has a few QOL improvements (adjusted icon sizes, aligning, etc.)
+
 * Requirements
 This package only supports Emacs version 26.1 and above.
 
@@ -32,4 +34,6 @@ If you want to use it as an addon to ~marginalia-mode~, add the following to you
 This will ensure that it is on when ~marginalia-mode~ is on and is off when it's off.
 
 * Acknowledgements
+Thanks to [[https://github.com/iyefrat][@iyefrat]] for creating the original version of this package.
+Thanks to[[https://github.com/seagle0128][ @seagle0128]] for creating [[https://github.com/seagle0128/all-the-icons-ivy-rich][all-the-icons-ivy-rich]], code from which was adapted to this package for QOL improvements.
 Thanks to [[https://github.com/minad][@minad]] and [[https://github.com/noctuid][@noctuid]] for getting the ball rolling on the functions used in this package.

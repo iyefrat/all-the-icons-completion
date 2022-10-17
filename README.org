@@ -35,5 +35,7 @@ This will ensure that it is on when ~marginalia-mode~ is on and is off when it's
 
 * Acknowledgements
 Thanks to [[https://github.com/iyefrat][@iyefrat]] for creating the original version of this package.
+
 Thanks to[[https://github.com/seagle0128][ @seagle0128]] for creating [[https://github.com/seagle0128/all-the-icons-ivy-rich][all-the-icons-ivy-rich]], code from which was adapted to this package for QOL improvements.
+
 Thanks to [[https://github.com/minad][@minad]] and [[https://github.com/noctuid][@noctuid]] for getting the ball rolling on the functions used in this package.

@@ -81,6 +81,9 @@
            (all-the-icons-faicon "file-o" :face 'all-the-icons-dsilver :height 0.9 :v-adjust 0.0)
          (propertize icon 'display '(raise 0.0)))))))
 
+(cl-defmethod all-the-icons-completion-get-icon ((cand string) (cat (eql 'project-file)))
+  (all-the-icons-completion-get-icon cand 'file))
+
 (cl-defmethod all-the-icons-completion-get-icon ((_cand string) (cat (eql 'dir)))
   "Display project icon all-the-icons-completion."
   (when (all-the-icons-completion--display-icons)

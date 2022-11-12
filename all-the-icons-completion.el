@@ -81,7 +81,9 @@
 (autoload 'bookmark-get-filename "bookmark")
 (defun all-the-icons-completion-get-bookmark-icon (cand)
   "Return the icon for the candidate CAND of completion category bookmark."
-  (all-the-icons-completion-get-file-icon (bookmark-get-filename cand)))
+  (if-let (fname (bookmark-get-filename cand))
+      (all-the-icons-completion-get-file-icon fname)
+    (concat (all-the-icons-octicon "bookmark" :face 'all-the-icons-completion-dir-face) " ")))
 
 (defun all-the-icons-completion-completion-metadata-get (orig metadata prop)
   "Meant as :around advice for `completion-metadata-get', Add icons as prefix.

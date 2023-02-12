@@ -43,6 +43,18 @@
   :group 'convenience
   :prefix "all-the-icons-completion")
 
+(defcustom all-the-icons-completion-icon-finders-alist
+  '((file . all-the-icons-completion-get-file-icon)
+    (project-file . all-the-icons-completion-get-file-icon)
+    (buffer . all-the-icons-completion-get-buffer-icon)
+    (bookmark . all-the-icons-completion-get-bookmark-icon))
+  "Associate categories with icon finders.
+The key of each element of the alist is a symbol representing a
+category and the value is a function which takes a single
+parameter, the candidate itself."
+  :type '(alist :key-type symbol :value-type function)
+  :group 'all-the-icons-completion)
+
 (defface all-the-icons-completion-dir-face
   '((t nil))
   "Face for the directory icon."
@@ -50,12 +62,9 @@
 
 (defun all-the-icons-completion-get-icon (cand cat)
   "Return the icon for the candidate CAND of completion category CAT."
-  (cl-case cat
-    (file (all-the-icons-completion-get-file-icon cand))
-    (project-file (all-the-icons-completion-get-file-icon cand))
-    (buffer (all-the-icons-completion-get-buffer-icon cand))
-    (bookmark (all-the-icons-completion-get-bookmark-icon cand))
-    (t "")))
+  (if-let ((finder (alist-get cat all-the-icons-completion-icon-finders-alist)))
+      (funcall finder cand)
+    ""))
 
 (defun all-the-icons-completion-get-file-icon (cand)
   "Return the icon for the candidate CAND of completion category file."

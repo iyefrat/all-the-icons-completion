@@ -48,16 +48,11 @@
   "Face for the directory icon."
   :group 'all-the-icons-faces)
 
-(defun all-the-icons-completion-get-icon (cand cat)
+(cl-defgeneric all-the-icons-completion-get-icon (_cand _cat)
   "Return the icon for the candidate CAND of completion category CAT."
-  (cl-case cat
-    (file (all-the-icons-completion-get-file-icon cand))
-    (project-file (all-the-icons-completion-get-file-icon cand))
-    (buffer (all-the-icons-completion-get-buffer-icon cand))
-    (bookmark (all-the-icons-completion-get-bookmark-icon cand))
-    (t "")))
+  "")
 
-(defun all-the-icons-completion-get-file-icon (cand)
+(cl-defmethod all-the-icons-completion-get-icon (cand (_cat (eql file)))
   "Return the icon for the candidate CAND of completion category file."
   (cond ((string-match-p "\\/$" cand)
          (concat
@@ -65,7 +60,11 @@
           " "))
         (t (concat (all-the-icons-icon-for-file cand) " "))))
 
-(defun all-the-icons-completion-get-buffer-icon (cand)
+(cl-defmethod all-the-icons-completion-get-icon (cand (_cat (eql project-file)))
+  "Return the icon for the candidate CAND of completion category project-file."
+  (all-the-icons-completion-get-icon cand 'file))
+
+(cl-defmethod all-the-icons-completion-get-icon (cand (_cat (eql buffer)))
   "Return the icon for the candidate CAND of completion category buffer."
   (let* ((mode (buffer-local-value 'major-mode (get-buffer cand)))
          (icon (all-the-icons-icon-for-mode mode))
@@ -78,11 +77,12 @@
            parent-icon)
        icon)
      " ")))
+
 (autoload 'bookmark-get-filename "bookmark")
-(defun all-the-icons-completion-get-bookmark-icon (cand)
+(cl-defmethod all-the-icons-completion-get-icon (cand (_cat (eql bookmark)))
   "Return the icon for the candidate CAND of completion category bookmark."
   (if-let (fname (bookmark-get-filename cand))
-      (all-the-icons-completion-get-file-icon fname)
+      (all-the-icons-completion-get-icon fname 'file)
     (concat (all-the-icons-octicon "bookmark" :face 'all-the-icons-completion-dir-face) " ")))
 
 (defun all-the-icons-completion-completion-metadata-get (orig metadata prop)

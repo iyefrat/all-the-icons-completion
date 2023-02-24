@@ -16,7 +16,7 @@ This package only supports Emacs version 26.1 and above.
 It requires [[https://github.com/domtronn/all-the-icons.el][all-the-icons]].
 * Installation
 This package can be installed from [[https://melpa.org/#/all-the-icons-completion][MELPA]], or by cloning it and putting it in the load path.
-* Usage
+* Setup
 Add the following to your init-file:
 
 #+begin_src emacs-lisp
@@ -30,6 +30,17 @@ If you want to use it as an addon to ~marginalia-mode~, add the following to you
 #+end_src
 
 This will ensure that it is on when ~marginalia-mode~ is on and is off when it's off.
+
+* Customization
+Completion icons are retrieved through the generic function
+~all-the-icons-completion-get-icon~, with different methods per category. To add
+icons for a new category or override existing behaviour, define a new method, e.g.:
+
+#+begin_src emacs-lisp
+(cl-defmethod all-the-icons-completion-get-icon (cand (_cat (eql custom-category)))
+  "Return the icon for the candidate CAND of completion category custom-category."
+  (get-icon-for-custom-category-cand cand))
+#+end_src
 
 * Acknowledgements
 Thanks to [[https://github.com/minad][@minad]] and [[https://github.com/noctuid][@noctuid]] for getting the ball rolling on the functions used in this package.

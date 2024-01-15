@@ -66,17 +66,9 @@
 
 (cl-defmethod all-the-icons-completion-get-icon (cand (_cat (eql buffer)))
   "Return the icon for the candidate CAND of completion category buffer."
-  (let* ((mode (buffer-local-value 'major-mode (get-buffer cand)))
-         (icon (all-the-icons-icon-for-mode mode))
-         (parent-icon (all-the-icons-icon-for-mode
-                       (get mode 'derived-mode-parent))))
-    (concat
-     (if (symbolp icon)
-         (if (symbolp parent-icon)
-             (all-the-icons-faicon "sticky-note-o")
-           parent-icon)
-       icon)
-     " ")))
+  (with-current-buffer cand
+    (let ((icon (all-the-icons-icon-for-buffer)))
+      (concat (if (stringp icon) icon (all-the-icons-faicon "sticky-note-o")) " "))))
 
 (autoload 'bookmark-get-filename "bookmark")
 (cl-defmethod all-the-icons-completion-get-icon (cand (_cat (eql bookmark)))

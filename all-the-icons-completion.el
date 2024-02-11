@@ -58,7 +58,7 @@
          (concat
           (all-the-icons-icon-for-dir cand :face 'all-the-icons-completion-dir-face)
           " "))
-        (t (concat (all-the-icons-icon-for-file cand) " "))))
+        (t (concat (all-the-icons-icon-for-file (file-name-nondirectory cand)) " "))))
 
 (cl-defmethod all-the-icons-completion-get-icon (cand (_cat (eql project-file)))
   "Return the icon for the candidate CAND of completion category project-file."
